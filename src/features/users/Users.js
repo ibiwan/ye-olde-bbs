@@ -1,7 +1,8 @@
+import { UsersList } from "./styles";
 
 export default function Users(props) {
     return (
-        <div>
+        <div style={UsersList}>
             <h1>USERS:</h1>
         </div>
     )
