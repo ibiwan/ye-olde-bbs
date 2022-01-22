@@ -2,12 +2,14 @@ import './App.css';
 import { AppStyle } from './styles';
 
 import Users from './features/users/Users';
-import { useDispatch } from 'react-redux';
-import { selectUserId } from './features/users/usersSlice';
-import PostsList from './features/posts/PostsList';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSelectedUserId, selectUserId } from './features/users/usersSlice';
+import UserPosts from './features/posts/UserPosts';
+import AllPosts from './features/posts/PostsList';
 
 function App() {
   const dispatch = useDispatch()
+  const selectedUserId = useSelector(selectSelectedUserId)
 
   return (
     <div
@@ -18,7 +20,7 @@ function App() {
       style={AppStyle}
     >
       <Users />
-      <PostsList />
+      {selectedUserId ? <UserPosts /> : <AllPosts />}
     </div>
   );
 }

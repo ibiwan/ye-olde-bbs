@@ -17,3 +17,8 @@ export const PostCard = {
     color: "#FFFFFF",
     fontWeight: "bolder",
 }
+
+export const UserPostCard = {
+    ...PostCard,
+    backgroundColor: "#333399",
+}

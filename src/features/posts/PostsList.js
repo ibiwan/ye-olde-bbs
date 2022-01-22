@@ -6,7 +6,7 @@ import Post from './Post'
 import { populatePostsList, selectPosts } from './postsSlice'
 import { PostsListStyle } from './styles'
 
-export default function PostsList() {
+export default function AllPosts() {
     const { data, error, isLoading } = useGetPostsQuery()
     const dispatch = useDispatch()
 

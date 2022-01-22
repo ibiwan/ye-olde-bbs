@@ -15,10 +15,15 @@ export const gorestApi = createApi({
             query: () => "posts?page=1",
             providesTags: ['Posts'],
         }),
+        getPostsByUserId: builder.query({
+            query: id => `users/${id}/posts`,
+            providesTags: ['Posts'],
+        }),
     })
 })
 
 export const {
     useGetUsersQuery,
     useGetPostsQuery,
+    useGetPostsByUserIdQuery,
 } = gorestApi 
