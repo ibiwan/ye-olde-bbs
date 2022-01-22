@@ -1,10 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
 import Users from './features/users/Users';
+import { useDispatch } from 'react-redux';
+import { selectUserId } from './features/users/usersSlice';
 
 function App() {
+  const dispatch = useDispatch()
+
   return (
-    <div className="App">
+    <div
+      className="App"
+      onClick={() => {
+        dispatch(selectUserId(null))
+      }}
+    >
       <Users />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

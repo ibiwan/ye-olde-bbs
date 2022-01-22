@@ -17,3 +17,8 @@ export const UserCard = {
     color: "#FFFFFF",
     fontWeight: "bolder",
 }
+
+export const UserCardSelected = {
+    ...UserCard,
+    backgroundColor: "#333399",
+}

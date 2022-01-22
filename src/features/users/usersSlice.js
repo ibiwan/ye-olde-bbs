@@ -5,6 +5,7 @@ export const usersSlice = createSlice({
     name: 'usersSlice',
     initialState: {
         users: [],
+        selectedUserId: null,
     },
     reducers: {
         clearUsers: (stateSlice, _action) => {
@@ -13,12 +14,16 @@ export const usersSlice = createSlice({
         addUser: (stateSlice, action) => {
             stateSlice.users.push(action.payload)
         },
+        selectUserId: (stateSlice, action) => {
+            stateSlice.selectedUserId = action.payload
+        }
     }
 })
 
-export const { clearUsers, addUser } = usersSlice.actions
+export const { clearUsers, addUser, selectUserId } = usersSlice.actions
 
 export const selectUsers = state => state.usersSlice.users
+export const selectSelectedUserId = state => state.usersSlice.selectedUserId
 
 export const populateUserList = createAsyncThunk(
     'usersSlice/populateList',
