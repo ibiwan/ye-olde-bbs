@@ -1,23 +1,10 @@
+import { useSelector } from "react-redux";
 import { UsersList } from "./styles";
 import User from "./User";
+import { selectUsers } from "./usersSlice";
 
 export default function Users(props) {
-    const users = [
-        {
-            id: 18,
-            name: "Maverick",
-            email: "mav@topgun.mil",
-            gender: "male",
-            status: "active",
-        },
-        {
-            id: 19,
-            name: "Goose",
-            email: "gosling@topgun.mil",
-            gender: "male",
-            status: "inactive",
-        },
-    ]
+    const users = useSelector(selectUsers)
 
     const userList = users.map((user, i) =>
         <User
