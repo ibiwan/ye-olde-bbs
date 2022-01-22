@@ -24,6 +24,8 @@ export const { clearUsers, addUser, selectUserId } = usersSlice.actions
 
 export const selectUsers = state => state.usersSlice.users
 export const selectSelectedUserId = state => state.usersSlice.selectedUserId
+export const selectUserById = target_id => state =>
+    state.usersSlice.users.find(({ id }) => id === target_id)
 
 export const populateUserList = createAsyncThunk(
     'usersSlice/populateList',
