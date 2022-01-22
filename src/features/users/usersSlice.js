@@ -20,7 +20,14 @@ export const usersSlice = createSlice({
             },
         ],
     },
+    reducers: {
+        setUsers: (stateSlice, action) => {
+            stateSlice.users = action.payload
+        }
+    }
 })
+
+export const { setUsers } = usersSlice.actions
 
 export const selectUsers = state => state.usersSlice.users
 
