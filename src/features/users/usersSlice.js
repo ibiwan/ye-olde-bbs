@@ -1,34 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { timeout } from '../../util'
 
 export const usersSlice = createSlice({
     name: 'usersSlice',
     initialState: {
-        users: [
-            {
-                id: 18,
-                name: "Maverick",
-                email: "mav@topgun.mil",
-                gender: "male",
-                status: "active",
-            },
-            {
-                id: 19,
-                name: "Goose",
-                email: "gosling@topgun.mil",
-                gender: "male",
-                status: "inactive",
-            },
-        ],
+        users: [],
     },
     reducers: {
-        setUsers: (stateSlice, action) => {
-            stateSlice.users = action.payload
-        }
+        clearUsers: (stateSlice, _action) => {
+            stateSlice.users = []
+        },
+        addUser: (stateSlice, action) => {
+            stateSlice.users.push(action.payload)
+        },
     }
 })
 
-export const { setUsers } = usersSlice.actions
+export const { clearUsers, addUser } = usersSlice.actions
 
 export const selectUsers = state => state.usersSlice.users
+
+export const populateUserList = createAsyncThunk(
+    'usersSlice/populateList',
+    async (users = [], thunkApi) => {
+        const { dispatch, getState } = thunkApi
+        dispatch(clearUsers())
+
+        for (const user of users) {
+            dispatch(addUser(user))
+            await timeout(300)
+        }
+    }
+)
 
 export default usersSlice.reducer

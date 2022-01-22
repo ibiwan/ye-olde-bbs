@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetUsersQuery } from "../../datasources/gorest";
 import { UsersList } from "./styles";
 import User from "./User";
-import { selectUsers, setUsers } from "./usersSlice";
+import { populateUserList, selectUsers } from "./usersSlice";
 
 export default function Users(props) {
     const { data, error, isLoading } = useGetUsersQuery()
@@ -11,7 +11,7 @@ export default function Users(props) {
 
     useEffect(() => {
         if (!isLoading && data) {
-            dispatch(setUsers(data.data))
+            dispatch(populateUserList(data.data))
         }
     }, [isLoading, data])
 
