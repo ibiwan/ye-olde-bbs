@@ -18,6 +18,7 @@ function App() {
     <div
       className="App"
       onClick={() => {
+        if (createPostMode) { return }
         dispatch(selectUserId(null))
         dispatch(selectPostCreateMode(false))
       }}
