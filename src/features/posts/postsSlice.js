@@ -5,6 +5,7 @@ export const postsSlice = createSlice({
     name: 'postsSlice',
     initialState: {
         posts: [],
+        createPostMode: false,
     },
     reducers: {
         clearPosts: (stateSlice, _action) => {
@@ -13,12 +14,16 @@ export const postsSlice = createSlice({
         addPostToState: (stateSlice, action) => {
             stateSlice.posts.push(action.payload)
         },
+        setPostCreateMode: (stateSlice, action) => {
+            stateSlice.createPostMode = action.payload
+        }
     }
 })
 
 export const { clearPosts, addPostToState, setPostCreateMode } = postsSlice.actions
 
 export const selectPosts = state => state.postsSlice.posts
+export const selectPostCreateMode = state => state.postsSlice.createPostMode
 
 export const populatePostsList = createAsyncThunk(
     'postsSlice/populateList',
