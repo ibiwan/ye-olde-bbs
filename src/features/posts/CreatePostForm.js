@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useCreatePostMutation } from '../../datasources/gorest'
 import { Button } from '../../styles'
 import { selectSelectedUserId } from '../users/usersSlice'
 import { setPostCreateMode } from './postsSlice'
@@ -8,6 +9,7 @@ import { UserPostCard } from './styles'
 export default function CreatePostForm(_props) {
     const selectedUserId = useSelector(selectSelectedUserId)
     const dispatch = useDispatch()
+    const [createPost, result] = useCreatePostMutation()
 
     const titleRef = useRef()
     const bodyRef = useRef()
@@ -20,7 +22,7 @@ export default function CreatePostForm(_props) {
             title: titleRef.current?.value,
             body: bodyRef.current?.value,
         }
-        console.log({newPost})
+        createPost(newPost)
 
         dispatch(setPostCreateMode(false))
     }
@@ -36,21 +38,27 @@ export default function CreatePostForm(_props) {
             style={UserPostCard}
         >
             <div>
-                <span>Title: </span><input ref={titleRef} />
+                <span>Title: </span>
+                <input ref={titleRef} />
             </div>
             <div>
-                <span>Body: </span><input ref={bodyRef} />
+                <span>Body: </span>
+                <input ref={bodyRef} />
             </div>
             <div
             >
                 <button
                     style={Button}
                     onClick={submit}
-                >Submit</button>
+                >
+                    Submit
+                </button>
                 <button
                     style={Button}
                     onClick={cancel}
-                >Cancel</button>
+                >
+                    Cancel
+                </button>
             </div>
         </div>
     )
