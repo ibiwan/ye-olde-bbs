@@ -13,15 +13,19 @@ export const gorestApi = createApi({
             return headers
         }
     }),
+    tagTypes: ['Posts', 'Users'],
     endpoints: builder => ({
         getUsers: builder.query({
             query: () => "users",
+            providesTags: ['Users'],
         }),
         getPosts: builder.query({
             query: () => "posts?page=1",
+            providesTags: ['Posts'],
         }),
         getPostsByUserId: builder.query({
             query: id => `users/${id}/posts`,
+            providesTags: ['Posts'],
         }),
         createPost: builder.mutation({
             query: (body) => ({
@@ -29,6 +33,7 @@ export const gorestApi = createApi({
                 method: `POST`,
                 body,
             }),
+            invalidatesTags: ['Posts'],
         })
     })
 })
