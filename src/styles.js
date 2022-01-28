@@ -12,3 +12,8 @@ export const Button = {
     margin: "10px 10px",
     cursor: "pointer",
 }
+
+export const DisabledButton = {
+    ...Button,
+    backgroundColor: '#CCCCCC',
+}

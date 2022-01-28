@@ -1,7 +1,7 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useCreatePostMutation } from '../../datasources/gorest'
-import { Button } from '../../styles'
+import { Button, DisabledButton } from '../../styles'
 import { selectSelectedUserId } from '../users/usersSlice'
 import { setPostCreateMode } from './postsSlice'
 import { UserPostCard } from './styles'
@@ -11,8 +11,12 @@ export default function CreatePostForm(_props) {
     const dispatch = useDispatch()
     const [createPost, result] = useCreatePostMutation()
 
+    // uncontrolled
     const titleRef = useRef()
-    const bodyRef = useRef()
+
+    // controlled
+    const [bodyText, setBodyText] = useState('')
+    const handleBodyTextChange = e => setBodyText(e.target.value)
 
     const submit = (e) => {
         e.stopPropagation()
@@ -20,7 +24,7 @@ export default function CreatePostForm(_props) {
         const newPost = {
             user_id: selectedUserId,
             title: titleRef.current?.value,
-            body: bodyRef.current?.value,
+            body: bodyText
         }
         createPost(newPost)
 
@@ -43,13 +47,14 @@ export default function CreatePostForm(_props) {
             </div>
             <div>
                 <span>Body: </span>
-                <input ref={bodyRef} />
+                <input value={bodyText} onChange={handleBodyTextChange} />
             </div>
             <div
             >
                 <button
-                    style={Button}
+                    style={bodyText ? Button : DisabledButton}
                     onClick={submit}
+                    disabled={!bodyText}
                 >
                     Submit
                 </button>
