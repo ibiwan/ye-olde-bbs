@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useGetPostsByUserIdQuery } from "../../datasources/gorest"
+import { useGetPostsByUserIdQuery } from "../../datasources/kiston"
 import { selectSelectedUserId } from "../users/usersSlice"
 import Post from "./Post"
 import { populatePostsList, selectPosts } from "./postsSlice"

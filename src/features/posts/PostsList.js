@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { useGetPostsQuery } from '../../datasources/gorest'
+import { useGetPostsQuery } from '../../datasources/kiston'
 import Post from './Post'
 import { populatePostsList, selectPosts } from './postsSlice'
 import { PostsListStyle } from './styles'
@@ -12,7 +12,7 @@ export default function AllPosts() {
 
     useEffect(() => {
         if (!isLoading && data) {
-            dispatch(populatePostsList(data.data))
+            dispatch(populatePostsList(data))
         }
     }, [isLoading, data])
 

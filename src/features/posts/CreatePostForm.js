@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useCreatePostMutation } from '../../datasources/gorest'
+import { useCreatePostMutation } from '../../datasources/kiston'
 import { Button, DisabledButton } from '../../styles'
 import { selectSelectedUserId } from '../users/usersSlice'
 import { setPostCreateMode } from './postsSlice'
