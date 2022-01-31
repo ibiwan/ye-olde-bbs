@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectSelectedUserId, selectUserById, selectUserId } from '../users/usersSlice'
 import { PostCard, UserPostCard } from './styles'
 
-export default function Post({ post, post: { id, user_id, title, body } }) {
-    console.log({post})
-    
+export default function Post({ post, post: { id, user_id, title, body } }) {    
     const dispatch = useDispatch()
     const selectedUserId = useSelector(selectSelectedUserId)
     const user = useSelector(selectUserById(user_id))

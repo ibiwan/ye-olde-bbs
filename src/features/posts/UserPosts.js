@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useGetPostsByUserIdQuery } from "../../datasources/kiston"
+import { useGetPostsByUserIdQuery } from "../../datasources"
 import { selectSelectedUserId } from "../users/usersSlice"
 import Post from "./Post"
 import { populatePostsList, selectPosts } from "./postsSlice"
@@ -14,7 +14,7 @@ export default function UserPosts(props) {
 
     useEffect(() => {
         if (!isLoading && data) {
-            dispatch(populatePostsList(data.data))
+            dispatch(populatePostsList(data))
         }
     }, [isLoading, data])
 

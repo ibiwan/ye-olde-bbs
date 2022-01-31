@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Flipper, Flipped } from 'react-flip-toolkit'
 
-import { useGetUsersQuery } from "../../datasources/kiston";
+import {useGetUsersQuery} from '../../datasources/index'
 import { UsersList } from "./styles";
 import User from "./User";
 import { populateUserList, selectSelectedUserId, selectUsers } from "./usersSlice";
@@ -13,6 +13,7 @@ export default function Users(props) {
 
     useEffect(() => {
         if (!isLoading && data) {
+            console.log({users:data})
             dispatch(populateUserList(data))
         }
     }, [isLoading, data])

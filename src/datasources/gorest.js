@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const API_KEY = process.env.REACT_APP_GOREST_API_KEY
 
-export const gorestApi = createApi({
+export const api = createApi({
     reducerPath: 'gorestApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://gorest.co.in/public/v1',
@@ -18,18 +18,22 @@ export const gorestApi = createApi({
         getUsers: builder.query({
             query: () => "users",
             providesTags: ['Users'],
+            transformResponse: (response, meta, arg) => response.data,
         }),
         getUserById: builder.query({
             query: id => `users/${id}`,
             providesTags: ['Users'],
+            transformResponse: (response, meta, arg) => response.data,
         }),
         getPosts: builder.query({
             query: () => "posts?page=1",
             providesTags: ['Posts'],
+            transformResponse: (response, meta, arg) => response.data,
         }),
         getPostsByUserId: builder.query({
             query: id => `users/${id}/posts`,
             providesTags: ['Posts'],
+            transformResponse: (response, meta, arg) => response.data,
         }),
         createPost: builder.mutation({
             query: (body) => ({
@@ -48,4 +52,4 @@ export const {
     useGetPostsQuery,
     useGetPostsByUserIdQuery,
     useCreatePostMutation,
-} = gorestApi 
+} = api 

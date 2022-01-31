@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { useGetPostsQuery } from '../../datasources/kiston'
+import { useGetPostsQuery } from '../../datasources'
 import Post from './Post'
 import { populatePostsList, selectPosts } from './postsSlice'
 import { PostsListStyle } from './styles'
