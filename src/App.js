@@ -7,7 +7,7 @@ import { selectSelectedUserId, selectUserId } from './features/users/usersSlice'
 import UserPosts from './features/posts/UserPosts';
 import AllPosts from './features/posts/PostsList';
 import CreatePost from './features/posts/CreatePost';
-import { selectPostCreateMode } from './features/posts/postsSlice';
+import { selectPostCreateMode, setPostCreateMode } from './features/posts/postsSlice';
 
 function App() {
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ function App() {
       onClick={() => {
         if (createPostMode) { return }
         dispatch(selectUserId(null))
-        dispatch(selectPostCreateMode(false))
+        dispatch(setPostCreateMode(false))
       }}
       style={AppStyle}
     >

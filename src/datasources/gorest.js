@@ -19,6 +19,10 @@ export const gorestApi = createApi({
             query: () => "users",
             providesTags: ['Users'],
         }),
+        getUserById: builder.query({
+            query: id => `users/${id}`,
+            providesTags: ['Users'],
+        }),
         getPosts: builder.query({
             query: () => "posts?page=1",
             providesTags: ['Posts'],
@@ -40,6 +44,7 @@ export const gorestApi = createApi({
 
 export const {
     useGetUsersQuery,
+    useGetUserByIdQuery,
     useGetPostsQuery,
     useGetPostsByUserIdQuery,
     useCreatePostMutation,

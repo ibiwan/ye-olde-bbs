@@ -23,6 +23,11 @@ export const postsSlice = createSlice({
 export const { clearPosts, addPostToState, setPostCreateMode } = postsSlice.actions
 
 export const selectPosts = state => state.postsSlice.posts
+export const selectPostsByUserId = id => state =>
+    state.postsSlice.posts.filter(
+        ({ user_id }) =>
+            user_id === id
+    )
 export const selectPostCreateMode = state => state.postsSlice.createPostMode
 
 export const populatePostsList = createAsyncThunk(
@@ -35,6 +40,14 @@ export const populatePostsList = createAsyncThunk(
             dispatch(addPostToState(post))
             await timeout(50)
         }
+    }
+)
+
+export const createNewPost = createAsyncThunk(
+    'postsSlice/createNewPost',
+    async (post, thunkApi) => { 
+        const {dispatch, getState} = thunkApi
+        dispatch(createNewPost(post))
     }
 )
 
