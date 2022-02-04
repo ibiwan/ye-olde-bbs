@@ -1,16 +1,12 @@
 import { useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useCreatePostMutation } from '../../datasources'
 import { Button, DisabledButton } from '../../styles'
-import { selectSelectedUserId } from '../users/usersSlice'
-import { setPostCreateMode } from './postsSlice'
 import { UserPostCard } from './styles'
 
-export default function CreatePostForm(_props) {
-    const selectedUserId = useSelector(selectSelectedUserId)
-    const dispatch = useDispatch()
-    const [createPost, result] = useCreatePostMutation()
-
+export default function CreatePostForm({
+    userId,
+    onCreate,
+    onCancel,
+}) {
     // uncontrolled
     const titleRef = useRef()
 
@@ -20,21 +16,17 @@ export default function CreatePostForm(_props) {
 
     const submit = (e) => {
         e.stopPropagation()
-
         const newPost = {
-            user_id: selectedUserId,
+            user_id: userId,
             title: titleRef.current?.value,
             body: bodyText
         }
-        createPost(newPost)
-
-        dispatch(setPostCreateMode(false))
+        onCreate(newPost)
     }
 
     const cancel = (e) => {
         e.stopPropagation()
-
-        dispatch(setPostCreateMode(false))
+        onCancel()
     }
 
     return (
@@ -47,10 +39,12 @@ export default function CreatePostForm(_props) {
             </div>
             <div>
                 <span>Body: </span>
-                <input value={bodyText} onChange={handleBodyTextChange} />
+                <input
+                    value={bodyText}
+                    onChange={handleBodyTextChange}
+                />
             </div>
-            <div
-            >
+            <div>
                 <button
                     style={bodyText ? Button : DisabledButton}
                     onClick={submit}
